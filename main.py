@@ -4,6 +4,8 @@ from question_model import Question
 from data import question_data
 from quiz_brain import QuizBrain
 
+ui = Interface()
+
 question_bank = []
 
 for i in question_data:
@@ -13,8 +15,6 @@ for i in question_data:
 
 selected_question = random.sample(question_bank, 10)
 quiz = QuizBrain(selected_question)
-
-ui = Interface()
 
 while quiz.still_has_question():
     quiz.next_question()
