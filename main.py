@@ -17,8 +17,5 @@ selected_question = random.sample(question_bank, 10)
 quiz = QuizBrain(selected_question)
 ui = Interface(quiz)
 
-# while quiz.still_has_question():
-#     quiz.next_question()
-#
 # print("You have completed the quiz")
 # print(f"your Final score: {quiz.score}/{len(quiz.question_list)}")
