@@ -18,7 +18,7 @@ class Interface:
         # Score Display
 
         self.score_board = Label(text=f"\tScore: {self.quiz.score}", fg="white",
-                                 font=("Arial", 12, "bold"), bg=BACKGROUND, highlightthickness=1)
+                                 font=("Arial", 12, "bold"), bg=BACKGROUND, highlightthickness=0)
         self.score_board.grid(row=0, column=1, columnspan=2)
 
         # Question Screen
@@ -54,14 +54,16 @@ class Interface:
 
         self.screen.config(bg="white")
 
-        try:
-            current_question = self.quiz.next_question()
-            self.screen.itemconfig(self.question_display, text=current_question)
-            self.quiz.question_number += 1
-        except IndexError:
-            pass
+        current_question = self.quiz.next_question()
+        self.screen.itemconfig(self.question_display, text=current_question)
+        self.quiz.question_number += 1
+
+        self.false_button["state"] = "active"
+        self.true_button["state"] = "active"
 
     def true_checker(self):
+        self.false_button["state"] = "disabled"
+        self.true_button["state"] = "disabled"
 
         self.is_right = self.quiz.answer_check("True")
 
@@ -80,6 +82,9 @@ class Interface:
             self.window.after(1000, self.result_announce)
 
     def false_checker(self):
+        self.false_button["state"] = "disabled"
+        self.true_button["state"] = "disabled"
+
         self.is_right = self.quiz.answer_check("False")
 
         if self.is_right:
@@ -100,4 +105,3 @@ class Interface:
         self.screen.itemconfig(self.question_display, text=f"Quiz Completed\nFinal Score: {self.quiz.score}/10")
         retry_button = Button(text="Retry")
         retry_button.grid(row=2, column=0, columnspan=2)
-        
