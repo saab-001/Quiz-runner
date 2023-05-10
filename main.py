@@ -1,18 +1,24 @@
 import random
 from ui import Interface
 from question_model import Question
-from data import question_data
 from quiz_brain import QuizBrain
 
 
-question_bank = []
+def ques_generator():
 
-for i in question_data:
-    text_data = i["question"]
-    answer_data = i["correct_answer"]
-    question_bank += [Question(text_data, answer_data)]
+    from data import question_data
 
-selected_question = random.sample(question_bank, 10)
+    data = question_data
+    question_bank = []
+    for i in data:
+        text_data = i["question"]
+        answer_data = i["correct_answer"]
+        question_bank += [Question(text_data, answer_data)]
 
-quiz = QuizBrain(selected_question)
+    return random.sample(question_bank, 10)
+
+
+selected_questions = ques_generator()
+
+quiz = QuizBrain(selected_questions)
 ui = Interface(quiz)

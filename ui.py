@@ -103,5 +103,3 @@ class Interface:
     def result_announce(self):
         self.screen.config(bg="white")
         self.screen.itemconfig(self.question_display, text=f"Quiz Completed\nFinal Score: {self.quiz.score}/10")
-        retry_button = Button(text="Retry")
-        retry_button.grid(row=2, column=0, columnspan=2)
