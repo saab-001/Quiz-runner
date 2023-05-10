@@ -12,6 +12,7 @@ class Interface:
         self.is_right = False
 
         self.window = Tk()
+        self.window.resizable(False, False)
         self.window.title("Quiz-runner")
         self.window.config(width=800, height=800, padx=30, pady=30, bg=BACKGROUND)
 
