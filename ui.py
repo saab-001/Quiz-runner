@@ -18,8 +18,8 @@ class Interface:
         # Score Display
 
         self.score_board = Label(text=f"\tScore: {self.quiz.score}", fg="white",
-                                 font=("Arial", 12, "bold"), bg=BACKGROUND, highlightthickness=0)
-        self.score_board.grid(row=0, column=1)
+                                 font=("Arial", 12, "bold"), bg=BACKGROUND, highlightthickness=1)
+        self.score_board.grid(row=0, column=1, columnspan=2)
 
         # Question Screen
 
@@ -31,7 +31,7 @@ class Interface:
                                                         text=f"question",
                                                         font=("Arial", 15, "italic"))
 
-        self.screen.grid(row=1, column=0, columnspan=2, pady=30)
+        self.screen.grid(row=1, rowspan=2, column=0, columnspan=2, pady=30)
 
         # Buttons
 
@@ -53,9 +53,13 @@ class Interface:
     def get_question(self):
 
         self.screen.config(bg="white")
-        current_question = self.quiz.next_question()
-        self.screen.itemconfig(self.question_display, text=current_question)
-        self.quiz.question_number += 1
+
+        try:
+            current_question = self.quiz.next_question()
+            self.screen.itemconfig(self.question_display, text=current_question)
+            self.quiz.question_number += 1
+        except IndexError:
+            pass
 
     def true_checker(self):
 
@@ -94,3 +98,6 @@ class Interface:
     def result_announce(self):
         self.screen.config(bg="white")
         self.screen.itemconfig(self.question_display, text=f"Quiz Completed\nFinal Score: {self.quiz.score}/10")
+        retry_button = Button(text="Retry")
+        retry_button.grid(row=2, column=0, columnspan=2)
+        
